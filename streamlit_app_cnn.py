@@ -12,8 +12,16 @@ dataset_path = 'fileforstreamlit.csv'
 df = pd.read_csv(dataset_path)
 
 def row_to_image(row):
-    pixels = row[1:].values.reshape((28, 28)).astype(np.float32)
-    return pixels
+    try:
+        values = row[1:].values
+        print(f"Length of values: {len(values)}")
+        print(f"First few values: {values[:10]}")  # Check the first few values
+        pixels = values.reshape((28, 28)).astype(np.float32)
+        return pixels
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        # Add further handling or logging as needed
+
 
 def predict(image):
     image = np.expand_dims(image, axis=-1)
