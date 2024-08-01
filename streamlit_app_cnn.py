@@ -8,7 +8,7 @@ import cv2
 
 model = tf.keras.models.load_model('cnn_chiffres_arturo.h5')
 
-dataset_path = 'fileforstreamlit'
+dataset_path = 'fileforstreamlit.csv'
 df = pd.read_csv(dataset_path)
 
 def row_to_image(row):
