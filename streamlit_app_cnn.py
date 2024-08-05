@@ -14,10 +14,8 @@ df = pd.read_csv(dataset_path)
 def row_to_image(row):
     try:
         values = row[1:].values
-        # Vérifier le nombre de valeurs
         if len(values) != 784:
             raise ValueError(f"Expected 784 values, got {len(values)}")
-        # Reshape des valeurs en image 28x28
         pixels = values.reshape((28, 28)).astype(np.float32)
         return pixels
     except Exception as e:
@@ -25,8 +23,8 @@ def row_to_image(row):
         return None
 
 def predict(image):
-    image = np.expand_dims(image, axis=-1)  # Ajouter le canal pour les images grayscale
-    image = np.expand_dims(image, axis=0)   # Ajouter la dimension batch
+    image = np.expand_dims(image, axis=-1) 
+    image = np.expand_dims(image, axis=0)  
     predictions = model.predict(image)
     predicted_class = np.argmax(predictions, axis=1)
     return predicted_class[0]
@@ -45,7 +43,6 @@ if page == "Page Principale":
             st.session_state['prediction'] = None
 
     if 'image' in st.session_state:
-        # Vérification de la structure et du type de l'image
         if isinstance(st.session_state['image'], np.ndarray) and st.session_state['image'].shape == (28, 28):
             try:
                 st.image(st.session_state['image'], caption='Image sélectionnée', clamp=True, channels='GRAY')
