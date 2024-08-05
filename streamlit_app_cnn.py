@@ -6,10 +6,8 @@ import random
 from streamlit_drawable_canvas import st_canvas
 import cv2
 
-# Charger le modèle TensorFlow
 model = tf.keras.models.load_model('cnn_chiffres_arturo.h5')
 
-# Charger le dataset
 dataset_path = 'fileforstreamlit.csv'
 df = pd.read_csv(dataset_path)
 
@@ -33,7 +31,6 @@ def predict(image):
     predicted_class = np.argmax(predictions, axis=1)
     return predicted_class[0]
 
-# Pages disponibles dans l'application
 pages = ["Page Principale", "Dessiner un Chiffre", "Page 3"]
 page = st.sidebar.selectbox("Choisissez une page", pages)
 
